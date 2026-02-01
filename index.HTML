@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For my  Yuki ❤️</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  height:100vh;
+  background:linear-gradient(120deg,#ff758c,#ff7eb3);
+  overflow:hidden;
+  color:white;
+  text-align:center;
+}
+
+/* Floating Hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:22px;
+  animation:float 6s linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(0);opacity:1;}
+  to{transform:translateY(-120vh);opacity:0;}
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.name{
+  font-size:90px;
+  animation:glow 2s infinite alternate;
+}
+@keyframes glow{
+  from{text-shadow:0 0 10px #fff;}
+  to{text-shadow:0 0 40px #ff003c;}
+}
+.subtitle{
+  font-size:22px;
+  margin:15px 0;
+}
+.btn{
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  cursor:pointer;
+  background:white;
+  color:#ff4d6d;
+}
+
+/* CINEMATIC SLIDESHOW (FASTER) */
+.slideshow{
+  position:absolute;
+  inset:0;
+  background:rgba(226, 11, 111, 0.446);
+  display:none;
+  overflow:hidden;
+}
+
+.slide{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  animation:cinematic 3.5s ease-in-out forwards;
+}
+
+@keyframes cinematic{
+  0%{opacity:0; transform:scale(1.15);}
+  15%{opacity:1;}
+  85%{opacity:1; transform:scale(1);}
+  100%{opacity:0;}
+}
+
+/* LOVE LETTER */
+#letter{
+  position:absolute;
+  inset:0;
+  background:rgba(16, 16, 16, 0.218);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.paper{
+  background:white;
+  color:#ff4d6d;
+  padding:30px;
+  border-radius:20px;
+  width:90%;
+  max-width:420px;
+  font-size:17px;
+  text-align:left;
+  line-height:1.6;
+}
+
+/* PROPOSAL */
+#proposal{
+  position:absolute;
+  inset:0;
+  background:#841a1a99;
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+.card{
+  background:white;
+  color:#ff4d6d;
+  padding:35px;
+  border-radius:25px;
+  width:90%;
+  max-width:400px;
+  animation:pop 0.6s ease;
+}
+@keyframes pop{
+  from{transform:scale(0.5);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+.buttons{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+.yes{
+  background:#ff004c;
+  color:white;
+  padding:10px 25px;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+}
+.no{
+  background:#ddd;
+  color:#333;
+  padding:10px 25px;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+  position:relative;
+}
+#response{
+  margin-top:20px;
+  font-size:22px;
+}
+</style>
+</head>
+
+<body onclick="playMusic()">
+
+<!-- 🎵 MUSIC -->
+<audio id="music" loop>
+  <source src="mk.mp3" type="audio/mpeg">
+</audio>
+
+<div class="hero">
+  <h1 class="name">Y U K I 💖</h1>
+  <p class="subtitle">Every love story is beautiful, but ours is my favorite ✨</p>
+  <button class="btn" onclick="startShow()">Start 💌</button>
+</div>
+
+<!-- SLIDESHOW -->
+<div class="slideshow" id="slideshow"></div>
+
+<!-- LOVE LETTER -->
+<div id="letter">
+  <div class="paper">
+    <div id="typing"></div>
+  </div>
+</div>
+
+<!-- PROPOSAL -->
+<div id="proposal">
+  <div class="card">
+    <h2>Yuki 🌹</h2>
+    <p>
+      Every photo holds a memory,<br>
+      every memory holds my heart ❤️<br><br>
+      Will you be my Valentine kucchu Pucchu? <br>
+    </p>
+
+    <div class="buttons">
+      <button class="yes" onclick="yes()">YES 💕🥰</button>
+      <button class="no" onmouseover="moveNo()">NO 🙈😘</button>
+    </div>
+    <div id="response"></div>
+  </div>
+</div>
+
+<script>
+/* PHOTOS */
+const photos=[
+  "pp.jpeg",
+  "pg.jpeg",
+  "kk.jpeg" 
+];
+
+const slideshow=document.getElementById("slideshow");
+
+/* START FLOW */
+function startShow(){
+  slideshow.style.display="block";
+  let index=0;
+
+  const interval=setInterval(()=>{
+    if(index>=photos.length){
+      clearInterval(interval);
+      slideshow.style.display="none";
+      showLetter();
+      return;
+    }
+
+    const slide=document.createElement("div");
+    slide.className="slide";
+    slide.style.backgroundImage=`url(${photos[index]})`;
+    slideshow.appendChild(slide);
+
+    setTimeout(()=>slide.remove(),3500);
+    index++;
+  },3500);
+}
+
+/* LOVE LETTER TEXT */
+const letterText=`Dear Yukiiii (CUTU) ❤️
+
+From the first moment you came into my life,
+everything felt brighter and warmer.
+
+Your smile is my favorite place,
+your laugh is my favorite sound.
+
+This Valentine’s Day,
+I just want one thing…
+
+You my love 💖 
+
+I LOVE YOU SO SO MUCH MY JIGGLY PUFF 😭❤️`;
+
+function showLetter(){
+  document.getElementById("letter").style.display="flex";
+  const typing=document.getElementById("typing");
+  typing.innerHTML="";
+  let i=0;
+
+  const type=setInterval(()=>{
+    typing.innerHTML+=letterText.charAt(i);
+    i++;
+    if(i>=letterText.length){
+      clearInterval(type);
+      setTimeout(()=>{
+        document.getElementById("letter").style.display="none";
+        document.getElementById("proposal").style.display="flex";
+      },2000);
+    }
+  },45);
+}
+
+/* PROPOSAL */
+function yes(){
+  document.getElementById("response").innerHTML=
+  "SHE SAID YES 😭❤️<br>Happy Valentine’s Day Yuki 🌹<br>I love you endlessly 💖<br> MADE WITH LOVE BYY YOUR TINGU PUWALI !! 😘"
+  ;
+}
+
+function moveNo(){
+  const btn=document.querySelector(".no");
+  btn.style.left=Math.random()*200-100+"px";
+  btn.style.top=Math.random()*200-100+"px";
+}
+
+/* Floating Hearts */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💖";
+  h.innerHTML="😍";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(Math.random()*4+4)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),7000);
+},250);
+
+/* Music */
+function playMusic(){
+  document.getElementById("music").play();
+}
+</script>
+
+</body>
+</html>
